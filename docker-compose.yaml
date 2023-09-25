@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  backend:
+    build: ./backend # path to your backend's Dockerfile
+    ports:
+      - '3002:3000'
+    environment:
+      - DB_HOST=database # service name for Postgres
+      - DB_PORT=5432
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_USER_PASSWORD=1234
+      - SMTP_HOST=smtp.example.com
+      - SMTP_PORT=587
+      - SMTP_SECURE=false
+      - SMTP_USER=user
+      - SMTP_PASS=password
+      - SMTP_REJECT_UNAUTHORIZED=true
+      - PORT=3000
+      - FROM_EMAIL=email@example.com
+      - TO_EMAIL=email@example.com
+    depends_on:
+      - database
+  
+  frontend:
+    build: ./frontend # path to your frontend's Dockerfile
+    ports:
+      - '8080:80' # Expose Nginx on port 8080
+  
+  database:
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
