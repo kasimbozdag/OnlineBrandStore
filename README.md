@@ -328,10 +328,10 @@ When deploying with Docker, you might want to seed data when initializing your c
 1. **Setting Up Environment Variables**: Ensure that your Docker container has the necessary environment variables set. These should be defined in your `docker-compose.yml` file or passed when you start the container.
 
 2. **Run Migrations**:
-   Using `docker-compose`, you can execute commands inside your container. If your service is named `backend` in the `docker-compose.yml`, you'd run:
+   Using `docker`, you can execute commands inside your container. If your service is named `backend` in the `docker-compose.yml`, you'd run:
 
    ```bash
-   docker-compose exec backend yarn migration:run
+   docker exec backend_container_id yarn migration:run
    ```
 
    Again, if you have a custom script or process for migrations, adjust the command accordingly.
@@ -340,5 +340,5 @@ When deploying with Docker, you might want to seed data when initializing your c
    To revert the last migration inside Docker:
 
    ```bash
-   docker-compose exec backend yarn migration:revert
+   docker exec backend_container_id yarn migration:revert
    ```
