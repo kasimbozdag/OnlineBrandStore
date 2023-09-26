@@ -1,9 +1,9 @@
 // seeder.ts
 
 import { type } from "os";
-import { AppDataSource } from "./src/datasources/getDataSource";
-import { Brand } from "./src/entities/Brand";
-import { Product } from "./src/entities/Product";
+import { AppDataSource } from "./datasources/getDataSource";
+import { Brand } from "./entities/Brand";
+import { Product } from "./entities/Product";
 
 
 

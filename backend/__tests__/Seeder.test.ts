@@ -3,7 +3,7 @@
 import { Repository } from "typeorm";
 import { AppDataSource } from "../src/datasources/getDataSource";
 import { Product } from "../src/entities/Product";
-import { seedProducts } from "../seeder";
+import { seedProducts } from "../src/seeder";
 import { initializeDatabase } from "../src/helpers/utils";
 
 

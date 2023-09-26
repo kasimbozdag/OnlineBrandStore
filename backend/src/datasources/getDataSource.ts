@@ -4,7 +4,9 @@ require('dotenv').config();
 import 'reflect-metadata';
 import db from '../../config/database';
 import { DataSource } from 'typeorm';
+import path from 'path';
 
+const parentDir = path.join(__dirname, '..');
 const AppDataSource = new DataSource({
   type: 'postgres',
   host: db.host,
@@ -14,9 +16,9 @@ const AppDataSource = new DataSource({
   database: db.name,
   synchronize: false ,
   logging: false,
-  entities: [`${__dirname}/entities/**/*{.ts,.js}`],
-  migrations: [`${__dirname}/migrations/**/*{.ts,.js}`],
-  subscribers: [`${__dirname}/subscriber/**/*{.ts,.js}`],
+  entities: [`${parentDir}/entities/**/*{.ts,.js}`],
+  migrations: [`${parentDir}/migrations/**/*{.ts,.js}`],
+  subscribers: [`${parentDir}/subscriber/**/*{.ts,.js}`],
   /*cli: {
     entitiesDir: 'src/database/models',
     migrationsDir: 'src/database/migration',

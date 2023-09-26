@@ -1,6 +1,22 @@
 version: '3'
 
 services:
+  database:
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
+      - POSTGRES_DB=postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 1s
+      timeout: 1s
+      retries: 10
+
   backend:
     build: ./backend # path to your backend's Dockerfile
     ports:
@@ -21,23 +37,13 @@ services:
       - FROM_EMAIL=email@example.com
       - TO_EMAIL=email@example.com
     depends_on:
-      - database
+      database:
+        condition: service_healthy
   
   frontend:
     build: ./frontend # path to your frontend's Dockerfile
     ports:
       - '8080:80' # Expose Nginx on port 8080
-  
-  database:
-    image: postgres:latest
-    ports:
-      - '5432:5432'
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=1234
-      - POSTGRES_DB=postgres
-    volumes:
-      - pgdata:/var/lib/postgresql/data
 
 volumes:
   pgdata:

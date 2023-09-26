@@ -1,7 +1,6 @@
 // Brand.test.ts
 
 import { AppDataSource } from '../src/datasources/getDataSource';
-import { TestDataSource } from '../src/datasources/testDataSource';
 import { Brand } from '../src/entities/Brand'; // adjust path as necessary
 import { Repository } from 'typeorm';
 import { initializeDatabase } from '../src/helpers/utils';
